@@ -10,6 +10,9 @@ public class PlayerController : NetworkBehaviour
 
     private static int playerIdAvailable = 0;
 
+    public float moveSpeed = 2f;
+    public float rotateSpeed = 150f;
+
     private void Start()
     {
         LoadPlayerId();
@@ -53,16 +56,20 @@ public class PlayerController : NetworkBehaviour
         MovePlayer();
     }
 
-    public float moveSpeed = 2f;
-    public float rotateSpeed = 150f;
-
     private void MovePlayer()
     {
-        var h = Input.GetAxis("Horizontal") * moveSpeed;
-        var v = Input.GetAxis("Vertical") * rotateSpeed;
+        // Only move player if we are on player that we have authority
+        if (hasAuthority)
+        {
+            // Get axis values and multiply by public speed values
+            var v = Input.GetAxis("Vertical") * moveSpeed;
+            var h = Input.GetAxis("Horizontal") * rotateSpeed;
 
-        transform.Translate(Vector3.forward * v * Time.deltaTime);
+            // Move with 'Translate'
+            transform.Translate(Vector3.forward * v * Time.deltaTime);
 
-        transform.Rotate(Vector3.up * h * Time.deltaTime);
+            // Spin with 'Rotate'
+            transform.Rotate(Vector3.up * h * Time.deltaTime);
+        }
     }
 }
