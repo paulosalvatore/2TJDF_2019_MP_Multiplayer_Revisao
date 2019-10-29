@@ -87,8 +87,11 @@ public class PlayerController : NetworkBehaviour
     private void CmdSpawnCube()
     {
         // Instantiate 'cubePrefab' and hold it into 'cube' variable
-        //var cube = Instantiate(cubePrefab);
-        var cube = Instantiate(playerId == 1 ? cubeRedPrefab : cubeBluePrefab);
+        var cube = Instantiate(cubePrefab);
+        //var cube = Instantiate(playerId == 1 ? cubeRedPrefab : cubeBluePrefab);
+
+        // Set cube's owner id
+        cube.GetComponent<CubeController>().ownerId = playerId;
 
         // Change position of created cube to be in front of player owner
         //  transform.position: Represent player's position
