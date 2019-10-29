@@ -15,7 +15,7 @@ public class PlayerSplitScreenController : MonoBehaviour
     private void Update()
     {
         var axisVertical = playerId == 1 ? "Vertical" : "Vertical2";
-        var axisHorizontal = playerId == 1 ? "Horizontal" : "Horizontal";
+        var axisHorizontal = playerId == 1 ? "Horizontal" : "Horizontal2";
 
         // Get axis values and multiply by public speed values
         var v = Input.GetAxis(axisVertical) * moveSpeed;
